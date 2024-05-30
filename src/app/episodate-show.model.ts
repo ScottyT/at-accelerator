@@ -1,4 +1,4 @@
-export class EpisodateShow {
+export interface EpisodateShow {
   id: string;
   name: string;
   permalink: string;

@@ -1,10 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { TvShowTableComponent } from '../tv-show-table/tv-show-table.component';
-import { Observable } from 'rxjs';
-import { EpisodateShow } from '../episodate-show.model';
 import { EpisodateService } from '../episodate.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search-view',
@@ -15,19 +12,14 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class SearchViewComponent {
   searchQuery = signal<string>('');
-  shows$: Observable<EpisodateShow[]>;
-  //showSignal = toSignal(this.shows$, { initialValue: [] });
   constructor(public episodateService: EpisodateService) {}
 
+  tvShows = computed(() => this.episodateService.getAll());
+
   ngOnInit() {
-    //this.episodateService.showSignal();
     this.episodateService
       .getAll()
       .subscribe((x) => this.episodateService.setShows(x));
-  }
-
-  changeListOfShows(shows: EpisodateShow[]) {
-    this.episodateService.setShows(shows);
   }
 
   onSearchUpdated(sq: string) {
@@ -36,9 +28,4 @@ export class SearchViewComponent {
       .getAllBySearchTerm(sq)
       .subscribe((x) => this.episodateService.setShows(x));
   }
-
-  tvShows = computed(() => {
-    const sq = this.searchQuery();
-    return this.episodateService.getAllBySearchTerm(sq);
-  });
 }

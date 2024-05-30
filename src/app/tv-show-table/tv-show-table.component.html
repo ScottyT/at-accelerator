@@ -9,7 +9,7 @@
   </tr>
   </thead>
   <tbody>
-    @for(tvShow of filteredTvShows(); track tvShow.id) {
+    @for(tvShow of tvShows(); track tvShow.id) {
       <tr>
         <td data-label="Name">{{ tvShow.name }}</td>
         <td data-label="Country">{{ tvShow.country }}</td>
