@@ -6,7 +6,7 @@
           <legend>TV Show Search</legend>
           <label for="name">Name</label>
           <input #searchQuery type="text" id="name" placeholder="Name of the show"/>
-          <button class="primary" type="button" (click)="runSearch(searchQuery.value, $event)">Search</button>
+          <button class="primary" (click)="runSearch(searchQuery.value, $event)">Search</button>
         </fieldset>
       </form>
     </div>
