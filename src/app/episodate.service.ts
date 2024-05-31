@@ -1,11 +1,9 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { API } from './constants';
 import { HttpClient } from '@angular/common/http';
 import { EpisodateData } from './episodate-data.model';
 import { EpisodateShow } from './episodate-show.model';
-import { formatDate } from '@angular/common';
-import { Observable, map, tap } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,33 +13,14 @@ export class EpisodateService {
   private items$ = signal<EpisodateShow[]>([]);
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<EpisodateShow[]> {
-    return this.http.get<EpisodateData>(this.EPISODATE_URL + '/search').pipe(
-      tap((response) => {
-        response.tv_shows.map((x) => {
-          x.start_date = formatDate(x.start_date, 'yyyy', 'en-us');
-        });
-      }),
-      map((res) => res.tv_shows)
-    );
-  }
-
-  setShows(shows: EpisodateShow[]): void {
-    this.items$.set(shows);
-  }
-
-  getAllBySearchTerm(searchTerm: string) {
-    return this.http
+  getAllBySearchTerm(searchTerm: string = '') {
+    this.http
       .get<EpisodateData>(`${this.EPISODATE_URL}/search?q=${searchTerm}&page=1`)
-      .pipe(
-        tap((response) => {
-          response.tv_shows.map((x) => {
-            x.start_date = formatDate(x.start_date, 'yyyy', 'en-us');
-          });
-        }),
-        map((res) => res.tv_shows)
-      );
-  }
+      .pipe(map((res) => res.tv_shows))
+      .subscribe((data) => {
+        this.items$.set(data);
+      });
 
-  tvShows = this.items$.asReadonly();
+    return this.items$.asReadonly();
+  }
 }

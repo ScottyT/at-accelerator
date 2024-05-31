@@ -1,7 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
-import { CommonModule, formatDate } from '@angular/common';
+import { Component, Signal, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TvShowTableComponent } from '../tv-show-table/tv-show-table.component';
 import { EpisodateService } from '../episodate.service';
+import { EpisodateShow } from '../episodate-show.model';
 
 @Component({
   selector: 'app-search-view',
@@ -12,20 +13,13 @@ import { EpisodateService } from '../episodate.service';
 })
 export class SearchViewComponent {
   searchQuery = signal<string>('');
-  constructor(public episodateService: EpisodateService) {}
-
-  tvShows = computed(() => this.episodateService.getAll());
-
-  ngOnInit() {
-    this.episodateService
-      .getAll()
-      .subscribe((x) => this.episodateService.setShows(x));
+  protected data: Signal<EpisodateShow[]>;
+  constructor(protected episodateService: EpisodateService) {
+    this.runSearch();
   }
-
-  onSearchUpdated(sq: string) {
+  runSearch(sq: string = '', event?: Event) {
+    event?.preventDefault();
     this.searchQuery.set(sq);
-    this.episodateService
-      .getAllBySearchTerm(sq)
-      .subscribe((x) => this.episodateService.setShows(x));
+    this.data = this.episodateService.getAllBySearchTerm(sq);
   }
 }

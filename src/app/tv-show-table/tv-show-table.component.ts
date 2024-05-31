@@ -1,6 +1,5 @@
-import { Component, computed, input } from '@angular/core';
-import { CommonModule, formatDate } from '@angular/common';
-import { EpisodateService } from '../episodate.service';
+import { Component, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { EpisodateShow } from '../episodate-show.model';
 
 @Component({
@@ -12,5 +11,4 @@ import { EpisodateShow } from '../episodate-show.model';
 })
 export class TvShowTableComponent {
   tvShows = input<EpisodateShow[]>([]);
-  constructor(private episodateService: EpisodateService) {}
 }
