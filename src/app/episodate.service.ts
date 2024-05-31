@@ -1,8 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { API } from './constants';
 import { HttpClient } from '@angular/common/http';
-import { EpisodateData } from './episodate-data.model';
-import { EpisodateShow } from './episodate-show.model';
+import { EpisodateData } from './episodate-data.interface';
+import { EpisodateShow } from './episodate-show.interface';
 import { map } from 'rxjs';
 
 @Injectable({

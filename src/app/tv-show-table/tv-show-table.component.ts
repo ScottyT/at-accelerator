@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EpisodateShow } from '../episodate-show.model';
+import { EpisodateShow } from '../episodate-show.interface';
 
 @Component({
   selector: 'app-tv-show-table',
