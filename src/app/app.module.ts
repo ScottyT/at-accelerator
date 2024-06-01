@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchViewComponent } from './search-view/search-view.component';
 
 @NgModule({
-  declarations: [AppComponent, FavoritesViewComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   bootstrap: [AppComponent],
 })
