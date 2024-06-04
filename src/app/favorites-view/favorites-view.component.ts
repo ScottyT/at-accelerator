@@ -6,19 +6,16 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-favorites-view',
-  standalone: true,
   templateUrl: './favorites-view.component.html',
-  imports: [TvShowTableComponent, CommonModule],
   styleUrls: ['./favorites-view.component.css'],
 })
 export class FavoritesViewComponent {
-  protected data: Signal<EpisodateShow[]>;
-  constructor(public favoritesService: FavoritesService) {}
-  ngOnInit() {
-    this.getFavorites();
-  }
-
-  getFavorites() {
-    this.data = this.favoritesService.list;
-  }
+  // protected data: Signal<EpisodateShow[]>;
+  // constructor(public favoritesService: FavoritesService) {}
+  // ngOnInit() {
+  //   this.getFavorites();
+  // }
+  // getFavorites() {
+  //   this.data = this.favoritesService.list;
+  // }
 }

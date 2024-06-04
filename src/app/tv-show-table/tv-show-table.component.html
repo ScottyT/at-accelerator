@@ -9,7 +9,7 @@
   </tr>
   </thead>
   <tbody>
-    @for(tvShow of tvShows(); track tvShow.id) {
+    @for(tvShow of tvShows(); track $index) {
       <tr>
         <td data-label="Name">{{ tvShow.name }}</td>
         <td data-label="Country">{{ tvShow.country }}</td>
@@ -17,7 +17,7 @@
         <td data-label="Status">{{ tvShow.status }}</td>
         <td data-label="Actions">
           <span class="icon-info"></span>
-          <span class="icon-bookmark" (click)="this.addFavorite(tvShow)"></span>
+          <span class="icon-bookmark" [class.highlight]="addHighlightClass(tvShow)" (click)="favoritesService.toggleFavorite(tvShow)"></span>
           <span class="icon-link"></span>
         </td>
       </tr>

@@ -1,5 +1,5 @@
 export interface EpisodateShow {
-  id: string;
+  id: number;
   name: string;
   permalink: string;
   start_date: string;
@@ -9,3 +9,6 @@ export interface EpisodateShow {
   status: string;
   image_thumbnail_path: string;
 }
+
+export type TvShowIds = Array<EpisodateShow['id']>;
+export type TvShowId = EpisodateShow['id'];
