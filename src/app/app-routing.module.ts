@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { FavoritesViewComponent } from './favorites-view/favorites-view.component';
-import { DetailsComponent } from './details/details.component';
 import { tvShowRouteResolverResolver } from './tv-show-route-resolver.resolver';
 
 const routes: Routes = [
@@ -10,7 +9,8 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesViewComponent },
   {
     path: 'details/:id',
-    component: DetailsComponent,
+    loadComponent: () =>
+      import('./details/details.component').then((c) => c.DetailsComponent),
     resolve: { tvshow: tvShowRouteResolverResolver },
   },
 ];

@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./favorites-view.component.css'],
 })
 export class FavoritesViewComponent {
-  // protected data: Signal<EpisodateShow[]>;
-  // constructor(public favoritesService: FavoritesService) {}
-  // ngOnInit() {
-  //   this.getFavorites();
-  // }
-  // getFavorites() {
-  //   this.data = this.favoritesService.list;
-  // }
+  protected data: Signal<EpisodateShow[]>;
+  constructor(public favoritesService: FavoritesService) {}
+  ngOnInit() {
+    this.getFavorites();
+  }
+  getFavorites() {
+    this.data = this.favoritesService.favorites;
+  }
 }
