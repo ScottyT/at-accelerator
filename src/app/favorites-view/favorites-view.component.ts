@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-favorites-view',
   templateUrl: './favorites-view.component.html',
   styleUrls: ['./favorites-view.component.css'],
+  standalone: true,
+  imports: [TvShowTableComponent, CommonModule],
 })
 export class FavoritesViewComponent {
   protected data: Signal<EpisodateShow[]>;

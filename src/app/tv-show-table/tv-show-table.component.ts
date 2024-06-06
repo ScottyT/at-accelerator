@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EpisodateShow } from '../episodate-show.interface';
 import { FavoritesService } from '../favorites.service';
@@ -12,7 +12,9 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./tv-show-table.component.css'],
 })
 export class TvShowTableComponent {
-  tvShows = input<EpisodateShow[]>([]);
+  //tvShows = input<EpisodateShow[]>([]);
+  @Input()
+  tvShows: EpisodateShow[] = [];
   constructor(protected favoritesService: FavoritesService) {}
 
   addFavorite(show: EpisodateShow) {

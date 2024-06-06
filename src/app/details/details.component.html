@@ -1,2 +1,12 @@
-<p>details works!</p>
-{{ this.tvshow.name }}
+<div class="details-header container flex">
+    <h1 class="font-semibold">{{ tvshow.name }} - {{ tvshow.country }} - {{ tvshow.start_date | date: 'yyyy'}}</h1>
+</div>
+<hr />
+<div class="container">
+    <div class="row md:flex-row flex-col">
+        <div class="flex-1"><img src="{{ tvshow.image_path }}" /></div>
+        <div class="flex-1"><p class="description-text" [innerHTML]="tvshow.description"></p></div>
+    </div>
+    <p class="font-semibold text-lg pt-4">Rating: {{ tvshow.rating | number: '1.1-2' }}</p>
+</div>
+

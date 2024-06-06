@@ -9,7 +9,7 @@
   </tr>
   </thead>
   <tbody>
-    @for(tvShow of tvShows(); track $index) {
+    @for(tvShow of tvShows; track $index) {
       <tr>
         <td data-label="Name">{{ tvShow.name }}</td>
         <td data-label="Country">{{ tvShow.country }}</td>
