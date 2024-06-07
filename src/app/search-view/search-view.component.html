@@ -6,7 +6,7 @@
           <legend>TV Show Search</legend>
           <label for="name">Name</label>
           <input #searchQuery type="text" id="name" placeholder="Name of the show"/>
-          <button class="px-4 py-2 font-semibold text-base bg-sky-500 text-white rounded-none shadow-sm" (click)="runSearch(searchQuery.value, $event)">Search</button>
+          <button class="btn-primary" (click)="runSearch(searchQuery.value, $event)">Search</button>
         </fieldset>
       </form>
     </div>

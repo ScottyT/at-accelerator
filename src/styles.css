@@ -21,6 +21,10 @@ hr {
   background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
 }
 
+button {
+  border-radius: 0;
+}
+
 @layer base {
   h1 {
     font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
@@ -30,5 +34,11 @@ hr {
   }
   h3 {
     font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio))
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 font-semibold text-base bg-sky-500 focus:bg-gray-300 text-white hover:text-black;
   }
 }

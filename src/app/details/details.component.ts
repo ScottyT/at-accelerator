@@ -1,5 +1,5 @@
-import { Component, Input, Signal } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TvShowDetails } from '../tv-show-details.interface';
 import { CommonModule } from '@angular/common';
 
@@ -13,12 +13,9 @@ import { CommonModule } from '@angular/common';
 export class DetailsComponent {
   @Input()
   tvshow: TvShowDetails;
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-    // this.activatedRoute.data.subscribe(({ tvshow }) => {
-    //   console.log(tvshow as TvShowDetails);
-    //   this.tvshow = tvshow;
-    // });
+  goBack() {
+    this.router.navigate(['../']);
   }
 }
