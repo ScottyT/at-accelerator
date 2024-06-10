@@ -8,5 +8,6 @@
         <div class="flex-1"><p class="description-text" [innerHTML]="tvshow.description"></p></div>
     </div>
     <p class="font-semibold text-lg pt-4">Rating: {{ tvshow.rating | number: '1.1-2' }}/10 (rated by {{ tvshow.rating_count }} people)</p>
+    <p>{{tvshow.episodes.length}} - {{ numberOfSeasons() }} {{ numberOfSeasons() | i18nPlural: seasonTextMapping }}</p>
     <button class="btn-primary" (click)="goBack()">&lt; &lt; Back</button>
 </div>
