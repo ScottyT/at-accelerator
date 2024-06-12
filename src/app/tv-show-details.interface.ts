@@ -20,6 +20,7 @@ export interface TvShowDetails {
   genres: string[];
   pictures: string[];
   episodes: Countdown[];
+  seasonCount: number;
 }
 
 export interface Countdown {

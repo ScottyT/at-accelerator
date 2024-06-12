@@ -24,13 +24,4 @@ export class DetailsComponent {
   goBack() {
     this.router.navigate(['../']);
   }
-
-  seasonTextMapping: { [k: string]: string } = {
-    '=1': 'season',
-    other: 'seasons',
-  };
-
-  numberOfSeasons = computed(() => {
-    return this.tvshow.episodes[this.tvshow.episodes.length - 1].season;
-  });
 }
