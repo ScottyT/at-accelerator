@@ -2,7 +2,7 @@ import { Injectable, Signal, signal } from '@angular/core';
 import { API } from './constants';
 import { TvShowResponse } from './tv-show-details.interface';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TvShowDetailsService {
@@ -17,7 +17,8 @@ export class TvShowDetailsService {
         map((res) => {
           res.tvShow.seasonCount = res.tvShow.episodes.at(-1)!.season;
           return res.tvShow;
-        })
+        }),
+        shareReplay(1)
       );
   }
 }

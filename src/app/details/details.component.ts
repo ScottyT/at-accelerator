@@ -22,6 +22,6 @@ export class DetailsComponent {
   }
 
   goBack() {
-    this.router.navigate(['../']);
+    history.back();
   }
 }

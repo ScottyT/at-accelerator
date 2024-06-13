@@ -1,4 +1,5 @@
-<p>favorites-view works!</p>
 <div>
-    <app-tv-show-table [tvShows]="data()"></app-tv-show-table>
+    @for(tvshow of data(); track $index) {
+        <app-favorites-card [tvShowId]="tvshow.id"></app-favorites-card>
+    }
 </div>
