@@ -1,3 +1,8 @@
-<div class="w-33">
-    {{ favorite.name }}
+<div class="column m-3 overflow-hidden shadow-lg">
+    <h2>{{ tvShow.name }}</h2>
+    <div class="h-80 bg-cover" style="background-image: url('{{ tvShow.image }}');"></div>
+    <div class="px-6 py-4">
+        <p>Next episode: {{ tvShow.next_episode_date }}</p>
+    </div>
+    
 </div>

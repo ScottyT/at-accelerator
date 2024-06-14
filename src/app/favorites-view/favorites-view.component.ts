@@ -1,11 +1,10 @@
 import { Component, Signal, computed } from '@angular/core';
 import { FavoritesService } from '../favorites.service';
-import { EpisodateShow } from '../episodate-show.interface';
+import { EpisodateShow, FavoritesList } from '../episodate-show.interface';
 import { TvShowTableComponent } from '../tv-show-table/tv-show-table.component';
 import { CommonModule } from '@angular/common';
 import { TvShowDetailsService } from '../tv-show-details.service';
-import { Observable, forkJoin } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable, concatMap, map, mergeMap, shareReplay } from 'rxjs';
 import { TvShowDetails } from '../tv-show-details.interface';
 import { FavoritesCardComponent } from '../favorites-card/favorites-card.component';
 
@@ -17,8 +16,7 @@ import { FavoritesCardComponent } from '../favorites-card/favorites-card.compone
   imports: [TvShowTableComponent, CommonModule, FavoritesCardComponent],
 })
 export class FavoritesViewComponent {
-  protected data: Signal<EpisodateShow[]>;
-  public favorites$: Observable<EpisodateShow[]>;
+  favoritesList: FavoritesList[] = [];
   public tvShowDetails$: Observable<TvShowDetails>;
   constructor(
     public favoritesService: FavoritesService,
@@ -28,7 +26,35 @@ export class FavoritesViewComponent {
     this.getFavorites();
   }
   getFavorites() {
-    this.data = this.favoritesService.favorites;
+    this.favoritesService.favorites$
+      .pipe(
+        map((x) => {
+          return x.sort((a: EpisodateShow, b: EpisodateShow) => {
+            if (a.status > b.status) return -1;
+            if (a.status < b.status) return 1;
+            return 0;
+          });
+        }),
+        concatMap((data) => data),
+        mergeMap((data) =>
+          this.detailsService.getShowDetails(data.id.toString())
+        ),
+        shareReplay(1)
+      )
+      .subscribe((res) => {
+        this.favoritesList.push({
+          name: res.name,
+          id: res.id,
+          next_episode_date: res.countdown?.air_date,
+          image: res.image_path,
+          status: res.status,
+        });
+        this.favoritesList.sort((a: FavoritesList, b: FavoritesList) => {
+          if (a.next_episode_date > b.next_episode_date) return -1;
+          if (a.next_episode_date < b.next_episode_date) return 1;
+          return 0;
+        });
+      });
     //this.favorites$ = toObservable(this.favoritesService.favorites);
     // forkJoin([
     //   this.favorites$,

@@ -27,7 +27,7 @@ export interface Countdown {
   season: number;
   episode: number;
   name: string;
-  air_date: Date;
+  air_date: string;
 }
 
 export interface TvShowResponse {

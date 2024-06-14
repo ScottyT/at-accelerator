@@ -11,9 +11,11 @@ export interface EpisodateShow {
 }
 
 export interface FavoritesList {
+  id: number;
   image: string | null;
-  name: string | null;
-  next_episode_date: Date | null;
+  name: string;
+  next_episode_date: string;
+  status: string;
 }
 
 export type TvShowIds = Array<EpisodateShow['id']>;

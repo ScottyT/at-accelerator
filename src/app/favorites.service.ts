@@ -2,6 +2,7 @@ import { Injectable, effect, signal } from '@angular/core';
 import { EpisodateShow } from './episodate-show.interface';
 import { LocalStorageService } from './local-storage.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FavoritesService {
@@ -10,6 +11,9 @@ export class FavoritesService {
     this.localStorageService.get(this.localStorageKey)
   );
   readonly favorites = this.favoritesList.asReadonly();
+  // public favorites$ = new BehaviorSubject<EpisodateShow[]>(
+  //   this.favoritesList()
+  // );
   public favorites$ = toObservable(this.favoritesList);
   constructor(
     private localStorageService: LocalStorageService<EpisodateShow[]>
