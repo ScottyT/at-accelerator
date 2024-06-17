@@ -2,7 +2,6 @@
     <h2>{{ details.name }}</h2>
     <div class="h-80 bg-cover" style="background-image: url('{{ details.image_path }}');"></div>
     <div class="px-6 py-4">
-        <p>Next episode: {{ details.countdown?.air_date | date }}</p>
+        <p>{{ details.countdown  | nextEpisodeCountdown:details.status }}</p>
     </div>
-    
 </div>

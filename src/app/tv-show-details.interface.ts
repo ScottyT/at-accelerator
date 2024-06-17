@@ -16,7 +16,7 @@ export interface TvShowDetails {
   image_thumbnail_path: string;
   rating: string;
   rating_count: string;
-  countdown: null | Countdown;
+  countdown: Countdown | null;
   genres: string[];
   pictures: string[];
   episodes: Countdown[];
