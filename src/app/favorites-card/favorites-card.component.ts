@@ -1,17 +1,28 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TvShowDetails } from '../tv-show-details.interface';
-import { TvShowDetailsService } from '../tv-show-details.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CountdownPipe } from '../pipes/countdown.pipe';
+import { RouterModule } from '@angular/router';
+import { FavoritesService } from '../favorites.service';
+import { ToggleFavoriteDirective } from '../toggle-favorite.directive';
 
 @Component({
   selector: 'app-favorites-card',
   standalone: true,
-  imports: [CommonModule, DatePipe, CountdownPipe],
+  imports: [
+    CommonModule,
+    DatePipe,
+    CountdownPipe,
+    RouterModule,
+    ToggleFavoriteDirective,
+  ],
   templateUrl: './favorites-card.component.html',
   styleUrl: './favorites-card.component.css',
 })
 export class FavoritesCardComponent {
-  @Input() details!: TvShowDetails;
-  constructor(private detailsService: TvShowDetailsService) {}
+  details = input.required<TvShowDetails>();
+  lastEpisode = computed(() => {
+    return this.details().episodes.at(-1);
+  });
+  constructor(protected favoritesService: FavoritesService) {}
 }

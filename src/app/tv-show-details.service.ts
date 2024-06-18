@@ -11,7 +11,7 @@ export class TvShowDetailsService {
   private EPISODATE_URL: string = API.episodateApiUrl;
   readonly allShowDetails$: Observable<TvShowDetails[]> =
     this.favoritesService.favorites$.pipe(
-      switchMap((show) => this.getAllTvShowDetails(show.map((x) => x.id))),
+      switchMap((show) => this.getAllTvShowDetails(show.map((x) => x))),
       shareReplay(1)
     );
   constructor(
@@ -34,14 +34,31 @@ export class TvShowDetailsService {
   private getAllTvShowDetails(showIds: TvShowIds): Observable<TvShowDetails[]> {
     return forkJoin(
       showIds.map((id) => this.getShowDetails(id.toString()))
-    ).pipe(
-      map((x) => {
-        return x.sort((a: TvShowDetails, b: TvShowDetails) => {
-          if (a.status > b.status) return -1;
-          if (a.status < b.status) return 1;
-          return 0;
-        });
-      })
-    );
+    ).pipe(map((tvShowDetails) => this.sortTvShowByNextEpisode(tvShowDetails)));
+  }
+
+  private sortTvShowByNextEpisode(
+    tvShowDetails: TvShowDetails[]
+  ): TvShowDetails[] {
+    tvShowDetails.sort((show1, show2) => {
+      if (show1.status === 'Running' && show2.status !== 'Running') {
+        return -1;
+      }
+      if (show1.status === 'Ended' || show1.status === 'Canceled/Ended') {
+        return 1;
+      }
+      if (show1.countdown && !show2.countdown) {
+        return -1;
+      }
+      if (
+        show1.countdown &&
+        show2.countdown &&
+        show1.countdown?.air_date < show2.countdown?.air_date
+      ) {
+        return -1;
+      }
+      return 0;
+    });
+    return tvShowDetails;
   }
 }

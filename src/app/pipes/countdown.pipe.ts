@@ -1,19 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Countdown } from '../tv-show-details.interface';
-import { addDays, sub, subDays } from 'date-fns';
-import type { Duration } from 'date-fns';
+import { differenceInDays } from 'date-fns';
 
 @Pipe({
   name: 'nextEpisodeCountdown',
   standalone: true,
 })
 export class CountdownPipe implements PipeTransform {
-  transform(value: Countdown | null, status: any) {
-    if (value !== null) {
-      const airDate = new Date(value.air_date);
-      //const dayDifference = date;
-      console.log(airDate.getDay());
-      return `Next episode in `;
+  transform(value: Countdown | undefined, status: any) {
+    const dateExact = value !== undefined ? value.air_date : Date.now();
+    const airDate = differenceInDays(dateExact, Date.now());
+
+    if (airDate > -1) {
+      return `Next episode in ${airDate} day`;
     } else {
       return status === 'Running'
         ? 'Running but no new episode'

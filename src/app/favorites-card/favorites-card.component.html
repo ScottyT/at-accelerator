@@ -1,7 +1,14 @@
-<div class="column m-3 overflow-hidden shadow-lg">
-    <h2>{{ details.name }}</h2>
-    <div class="h-80 bg-cover" style="background-image: url('{{ details.image_path }}');"></div>
+<div class="column m-3 overflow-hidden shadow-lg bg-white">
+    <div class="flex pl-4 justify-between">
+        <h2>{{ details().name }}</h2>
+        <div>
+            <span class="icon-info" routerLink="details/{{details().id}}"></span>
+            <span class="icon-bookmark" toggleFav [tvShowId]="details().id"></span>
+        </div>
+    </div>
+    
+    <div class="h-80 bg-cover" style="background-image: url('{{ details().image_path }}');"></div>
     <div class="px-6 py-4">
-        <p>{{ details.countdown  | nextEpisodeCountdown:details.status }}</p>
+        <p>{{ lastEpisode() | nextEpisodeCountdown:details }}</p>
     </div>
 </div>

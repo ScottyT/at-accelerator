@@ -17,13 +17,13 @@ export class TvShowTableComponent {
   constructor(protected favoritesService: FavoritesService) {}
 
   addFavorite(show: EpisodateShow) {
-    this.favoritesService.toggleFavorite(show);
+    this.favoritesService.toggleFavorite(show.id);
   }
 
   addHighlightClass(tvshow: EpisodateShow): boolean {
     return this.favoritesService
       .favorites()
-      .map((x) => x.id)
+      .map((x) => x)
       .includes(tvshow.id);
   }
 }
