@@ -1,6 +1,6 @@
 import {
   Directive,
-  ElementRef,
+  HostBinding,
   HostListener,
   Input,
   inject,
@@ -12,34 +12,15 @@ import { FavoritesService } from './favorites.service';
   standalone: true,
 })
 export class ToggleFavoriteDirective {
-  constructor(private elementRef: ElementRef) {}
   protected favoritesService = inject(FavoritesService);
 
-  @Input() tvShowId: number;
+  @Input({ required: true, alias: 'toggleFav' }) tvShowId: number;
   @HostListener('click') onClick() {
-    this.toggleFavorites(this.tvShowId);
+    this.favoritesService.toggleFavorite(this.tvShowId);
   }
 
-  ngAfterViewInit() {
-    const index = this.favoritesService.favoritesList().indexOf(this.tvShowId);
-    if (index !== -1) {
-      this.elementRef.nativeElement.classList.add('highlight');
-    }
-  }
-
-  toggleFavorites(id: number) {
-    const index = this.favoritesService.favoritesList().indexOf(id);
-    if (index !== -1) {
-      this.elementRef.nativeElement.classList.remove('highlight');
-      this.favoritesService.favoritesList.update((favorites) =>
-        favorites.filter((tvshow) => tvshow !== id)
-      );
-    } else {
-      this.elementRef.nativeElement.classList.add('highlight');
-      this.favoritesService.favoritesList.update((favorites) => [
-        id,
-        ...favorites,
-      ]);
-    }
+  @HostBinding('class.highlight')
+  get isFavorite() {
+    return this.favoritesService.favorites().includes(this.tvShowId);
   }
 }

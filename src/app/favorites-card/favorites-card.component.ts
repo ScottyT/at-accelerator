@@ -3,7 +3,6 @@ import { TvShowDetails } from '../tv-show-details.interface';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CountdownPipe } from '../pipes/countdown.pipe';
 import { RouterModule } from '@angular/router';
-import { FavoritesService } from '../favorites.service';
 import { ToggleFavoriteDirective } from '../toggle-favorite.directive';
 
 @Component({
@@ -22,7 +21,7 @@ import { ToggleFavoriteDirective } from '../toggle-favorite.directive';
 export class FavoritesCardComponent {
   details = input.required<TvShowDetails>();
   lastEpisode = computed(() => {
-    return this.details().episodes.at(-1);
+    return this.details().countdown;
   });
-  constructor(protected favoritesService: FavoritesService) {}
+  constructor() {}
 }

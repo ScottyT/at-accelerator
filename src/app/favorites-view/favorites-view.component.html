@@ -1,8 +1,5 @@
 <div class="flex flex-wrap">
-    <!-- <ng-container *ngFor="let tvshow of favoritesList">
-        <app-favorites-card [tvShow]="tvshow"></app-favorites-card>
-    </ng-container> -->
-    @for(tvshow of tvShowDetails; track $index) {
+    @for(tvshow of tvShowDetails | async; track $index) {
         <app-favorites-card [details]="tvshow"></app-favorites-card>
     }
 </div>

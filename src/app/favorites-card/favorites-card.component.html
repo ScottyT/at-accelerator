@@ -3,12 +3,12 @@
         <h2>{{ details().name }}</h2>
         <div>
             <span class="icon-info" routerLink="details/{{details().id}}"></span>
-            <span class="icon-bookmark" toggleFav [tvShowId]="details().id"></span>
+            <span class="icon-bookmark" [toggleFav]="details().id"></span>
         </div>
     </div>
     
     <div class="h-80 bg-cover" style="background-image: url('{{ details().image_path }}');"></div>
     <div class="px-6 py-4">
-        <p>{{ lastEpisode() | nextEpisodeCountdown:details }}</p>
+        <p>{{ lastEpisode() | nextEpisodeCountdown:details().status }}</p>
     </div>
 </div>
