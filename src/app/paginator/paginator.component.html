@@ -1,0 +1,7 @@
+<span>Page {{ currentPage }} of {{ totalPages }}</span>
+<div class="flex justify-between">
+    <button (click)="pageChangeClick(1)">Go to beginning</button>
+    <button [disabled]="currentPage == 1" (click)="pageChangeClick(currentPage - 1)">Previous</button>   
+    <button [disabled]="currentPage == totalPages" (click)="pageChangeClick(currentPage + 1)">Next</button>
+    <button (click)="pageChangeClick(totalPages)">Go to end</button>
+</div>
