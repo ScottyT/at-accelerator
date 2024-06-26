@@ -9,5 +9,18 @@
     </div>
     <p class="font-semibold text-lg pt-4">Rating: {{ tvshow.rating | number: '1.1-2' }}/10 (rated by {{ tvshow.rating_count }} people)</p>
     <p>{{tvshow.episodes.length}} episodes - {{ tvshow.seasonCount | i18nPlural: {'=1': '# season', 'other': '# seasons'} }}</p>
-    <button class="btn-primary" (click)="goBack()">&lt; &lt; Back</button>
+    
+    <div>
+        <button (click)="dialog.showModal()">Show images</button>
+        <button class="btn-primary" (click)="goBack()">&lt; &lt; Back</button>
+    </div>
 </div>
+<dialog #dialog>
+    <button (click)="dialog.close()" autofocus>Close</button>
+    <p>This modal dialog has a groovy backdrop!</p>
+    <div class="flex gap-2 h-20">
+        @for(image of tvshow.pictures; track $index){
+            <img [src]="image" />
+        }
+    </div>
+</dialog>

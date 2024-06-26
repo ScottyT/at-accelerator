@@ -41,4 +41,7 @@ button {
   .btn-primary {
     @apply px-4 py-2 font-semibold text-base bg-sky-500 focus:bg-gray-300 text-white hover:text-black;
   }
+  dialog {
+    padding: 16px;
+  }
 }

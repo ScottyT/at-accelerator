@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { CountdownPipe } from '../pipes/countdown.pipe';
 import { RouterModule } from '@angular/router';
 import { ToggleFavoriteDirective } from '../toggle-favorite.directive';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-favorites-card',
@@ -14,6 +15,7 @@ import { ToggleFavoriteDirective } from '../toggle-favorite.directive';
     CountdownPipe,
     RouterModule,
     ToggleFavoriteDirective,
+    CardComponent,
   ],
   templateUrl: './favorites-card.component.html',
   styleUrl: './favorites-card.component.css',
